@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Cowman Andrew J"/>
+  <meta name="keywords" content="andrew,cowman,south,dakota"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <link rel="stylesheet" href="css/main.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="js/main.js"></script>
+  <title>Gaea</title>
+  
+  <script>
+		var map;
+		var coords;
+		function initMap() {
+			map = document.getElementById('map');
+			map = new google.maps.Map(map, {
+				center: {lat: 8.981087401256054, lng: -79.58599090576172},
+				zoom: 6,
+				mapTypeId: google.maps.MapTypeId.SATELLITE,
+				zoomControl: true,
+				  mapTypeControl: false,
+				  scaleControl: true,
+				  streetViewControl: true,
+				  rotateControl: true,
+				  fullscreenControl: false
+			});
+			
+			var infoWindow = new google.maps.InfoWindow();
+			google.maps.event.addListener(map, 'click', function(event) {
+				retrieveImages($("#dateOne").val(), $("#dateTwo").val(), event.latLng.lat(), event.latLng.lng());
+			});
+		}
+  </script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdN6WVrJO5OnbZYW2kN03BWhBcvx04_bw&callback=initMap"></script>
+</head>
+<body>
+	<div id="imageWrap">
+		<h1>GAEA</h1>
+		<div id="map"></div>
+		<div id="imageOneWrapper">
+			<img id="imageOne"/>
+			<div id="imageOneDate" style="width:100%;text-align:center;"></div>
+		</div
+		><div id="imageTwoWrapper">
+			<img id="imageTwo"/>
+			<div id="imageTwoDate" style="width:100%;text-align:center;"></div>
+		</div>
+	</div>
+	<div id="ui">
+		<div id="dateUI">
+			<div id="imageOneUI">
+				<div class="dateLabel">CHANGE DATE ONE</div>
+				<input type="text" id="dateOne"/>
+			</div
+			><div id="imageTwoUI">
+				<div class="dateLabel">CHANGE DATE TWO</div>
+				<input type="text" id="dateTwo"/>
+			</div>
+			<div id="locationUI">
+				<div id="latWrapper">
+					<div class="coordLabel">Latitude:</div><input type="text" id="lat" style="margin:0 5px;"/>
+				</div>
+				<div id="longWrapper">
+					<div class="coordLabel">Longitude:</div><input type="text" id="long" style="margin:0 5px;"/>
+				</div>
+				<input type="button" id="runQuery" value="Go"/>
+			</div>
+		</div>
+		<div id="bottomRow">
+			<input type="button" id="getDates" value="Get Dates for Location"/>
+			<input type="button" id="hideDates" value="Hide"/>
+		</div>
+		<div id="dateList"></div>
+		<div style="margin:10px 0;"></div>
+	</div>
+</body>
+</html>
